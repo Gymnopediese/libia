@@ -1,0 +1,14 @@
+void	ia_adjust_weights(t_net *net, t_v *input)
+{
+	int	i;
+
+	m_stuff(&net->weights[0], input, &net->delta_hiden[0]);
+	i = 0;
+	while (++i < net->info.hiden_layers)
+	{
+		m_stuff(&net->weights[i], &net->hiden[i - 1],
+			&net->delta_hiden[i]);
+	}
+	m_stuff(&net->weights[i], &net->hiden[i - 1],
+		&net->delta_output);
+}
