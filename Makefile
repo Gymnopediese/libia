@@ -6,12 +6,12 @@
 #    By: albaud <albaud@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/18 13:07:44 by albaud            #+#    #+#              #
-#    Updated: 2023/02/21 11:48:44 by albaud           ###   ########.fr        #
+#    Updated: 2023/02/26 12:16:30 by albaud           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
-SRCS 	= forward.c ia_relu.c ia_sigmoid.c init_net.c k_voisin.c save.c train.c
+SRCS 	= forward.c ia_relu.c ia_sigmoid.c init_net.c k_voisin.c save.c train.c visualizer.c
 OBJS 	= ${SRCS:.c=.o}
 NAME 	= libia.a
 LIBS 	= mlib/mlib.a

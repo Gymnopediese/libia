@@ -6,7 +6,7 @@
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 01:25:40 by albaud            #+#    #+#             */
-/*   Updated: 2023/02/26 11:59:59 by albaud           ###   ########.fr       */
+/*   Updated: 2023/02/26 14:57:19 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,10 @@ typedef struct s_vis
 	pthread_t	t;
 	t_canvas	on;
 	t_canvas	off;
+	int			x;
+	int			y;
+	char		**inp_label;
+	char		**out_label;
 }	t_vis;
 
 typedef struct s_data
@@ -85,4 +89,7 @@ double	relu(double x);
 double	relu_prime(double x);
 double	sigmoid(double x);
 double	sigmoid_prime(double x);
+
+void	visualize(t_vis *v, t_v *inp);
+void	init_visualizer(t_vis *v, t_net *n);
 #endif
