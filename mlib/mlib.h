@@ -6,7 +6,7 @@
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 21:06:06 by albaud            #+#    #+#             */
-/*   Updated: 2023/02/17 19:19:41 by albaud           ###   ########.fr       */
+/*   Updated: 2023/02/27 00:46:03 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 t_mtx	m_new(int x, int y, int init);
 t_mtx	m_rand(int x, int y, int min, int max);
 
+double	m_max(t_mtx *a);
 //apply to res the dot product of a and b, clear res
 void	m_dot(t_mtx *a, t_mtx *b, t_mtx *res);
 void	m_clear(t_mtx *a, int num);

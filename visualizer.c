@@ -6,13 +6,13 @@
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 12:03:19 by albaud            #+#    #+#             */
-/*   Updated: 2023/02/26 20:06:06 by albaud           ###   ########.fr       */
+/*   Updated: 2023/02/26 23:52:44 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libia.h"
 
-#define NSIZE 10
+#define NSIZE 6
 #define MNEURON 50
 
 t_vector	ppose(int n, int i, int fsize, int dsize)
