@@ -6,12 +6,12 @@
 #    By: albaud <albaud@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/18 13:07:44 by albaud            #+#    #+#              #
-#    Updated: 2023/02/26 12:16:30 by albaud           ###   ########.fr        #
+#    Updated: 2023/03/07 23:18:14 by albaud           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
-SRCS 	= forward.c ia_relu.c ia_sigmoid.c init_net.c k_voisin.c save.c train.c visualizer.c
+SRCS 	= NeuronalNetwork/forward.c NeuronalNetwork/init_net.c NeuronalNetwork/save.c NeuronalNetwork/train.c function/ia_relu.c function/ia_sigmoid.c k_voisins/k_voisin.c visualizer/positions.c visualizer/vis_neurones.c visualizer/vis_synaps.c visualizer/visualizer.c
 OBJS 	= ${SRCS:.c=.o}
 NAME 	= libia.a
 LIBS 	= mlib/mlib.a
@@ -28,7 +28,7 @@ $(NAME)	: ${OBJS}
 		ar rcs ${NAME} ${OBJS} ${LIBS}
 
 c 		:
-		find *.c | tr '\n' ' '
+		find *.c */*.c | grep -v m_ | tr '\n' ' '
 		
 clean	:
 		rm -f ${OBJS}

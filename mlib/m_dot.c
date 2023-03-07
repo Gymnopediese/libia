@@ -6,13 +6,12 @@
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 10:26:23 by albaud            #+#    #+#             */
-/*   Updated: 2023/02/15 21:49:22 by albaud           ###   ########.fr       */
+/*   Updated: 2023/03/07 22:42:31 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mlib.h"
 #include "mlib.h"
-
 
 void	ia_dot_matrix_fuck_off(t_mtx *a, t_mtx *b, t_mtx *res)
 {

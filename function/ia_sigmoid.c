@@ -1,37 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   m_vdot.c                                           :+:      :+:    :+:   */
+/*   ia_sigmoid.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/17 12:05:10 by albaud            #+#    #+#             */
-/*   Updated: 2023/03/07 22:42:26 by albaud           ###   ########.fr       */
+/*   Created: 2023/02/21 10:36:22 by albaud            #+#    #+#             */
+/*   Updated: 2023/02/21 10:37:14 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlib.h"
+#include "libia.h"
 
-void	m_vvdot(t_mtx *a, t_v *b, t_v *res)
+double	sigmoid(double x)
 {
-	int		x;
-
-	x = -1;
-	while (++x < a->size)
-		res->arr[x] = v_dot(&a->arr[x], b);
+	return (1 / (1 + exp(-x)));
 }
 
-void	m_hvdot(t_mtx *a, t_v *b, t_v *res)
+double	sigmoid_prime(double x)
 {
-	int		x;
-	int		y;
-
-	x = -1;
-	while (++x < a->arr->size)
-	{
-		y = -1;
-		res->arr[x] = 0;
-		while (++y < a->size)
-			res->arr[x] += a->arr[y].arr[x] * b->arr[y];
-	}
+	return (x * (1 - x));
 }
