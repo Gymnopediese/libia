@@ -6,7 +6,7 @@
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 01:25:40 by albaud            #+#    #+#             */
-/*   Updated: 2023/03/07 23:10:42 by albaud           ###   ########.fr       */
+/*   Updated: 2023/03/09 12:39:51 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,10 @@
 # include <math.h>
 # include <pthread.h>
 # include <stdio.h>
-# include "../p/p.h"
-# include "../cfiles/cfiles.h"
+# include "p/p.h"
 # include "mlib/mlib.h"
+# include "koflibc/sources.h"
+# include "cfiles/cfiles.h"
 
 typedef struct s_info
 {

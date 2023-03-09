@@ -1,35 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   t_v.h                                              :+:      :+:    :+:   */
+/*   cfiles.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/15 21:06:06 by albaud            #+#    #+#             */
-/*   Updated: 2023/03/09 12:29:18 by albaud           ###   ########.fr       */
+/*   Created: 2023/02/14 00:41:29 by albaud            #+#    #+#             */
+/*   Updated: 2023/02/14 20:13:01 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef T_V_H
-# define T_V_H 2
+#ifndef CFILES_H
+# define CFILES_H
 
-typedef struct s_v
-{
-	double	*arr;
-	int		size;
-}	t_v;
+# include "../koflibc/sources.h"
 
-typedef struct s_v2
-{
-	double	x;
-	double	y;
-}	t_v2;
-
-typedef struct s_v3
-{
-	double	x;
-	double	y;
-	double	z;
-}	t_v3;
+int		f_file_size(char *file_name);
+char	*f_read(char *file_name);
+char	**f_readlines(char *file_name);
+void	ft_atoia_fast(char *str, char split, double *buffer, int div);
 
 #endif

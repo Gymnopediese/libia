@@ -1,35 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   t_v.h                                              :+:      :+:    :+:   */
+/*   atoia.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/15 21:06:06 by albaud            #+#    #+#             */
-/*   Updated: 2023/03/09 12:29:18 by albaud           ###   ########.fr       */
+/*   Created: 2023/02/14 20:12:27 by albaud            #+#    #+#             */
+/*   Updated: 2023/02/14 20:27:50 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef T_V_H
-# define T_V_H 2
+#include "cfiles.h"
 
-typedef struct s_v
+void	ft_atoia_fast(char *str, char split, double *buffer, int div)
 {
-	double	*arr;
-	int		size;
-}	t_v;
+	int		i;
+	int		k;
 
-typedef struct s_v2
-{
-	double	x;
-	double	y;
-}	t_v2;
-
-typedef struct s_v3
-{
-	double	x;
-	double	y;
-	double	z;
-}	t_v3;
-
-#endif
+	i = -1;
+	k = -1;
+	while (str[++k])
+	{
+		buffer[++i] = ft_atodo(&str[k]) / div;
+		while (str[++k] && str[k] != split)
+			;
+	}
+}

@@ -6,11 +6,11 @@
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 16:03:17 by albaud            #+#    #+#             */
-/*   Updated: 2023/02/21 11:51:45 by albaud           ###   ########.fr       */
+/*   Updated: 2023/03/09 12:40:03 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libia.h"
+#include "../libia.h"
 
 double	ia_k_voisins_om(t_mtx *input, t_mtx *output, t_v *guess, int v)
 {

@@ -1,35 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   t_v.h                                              :+:      :+:    :+:   */
+/*   file_size.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/15 21:06:06 by albaud            #+#    #+#             */
-/*   Updated: 2023/03/09 12:29:18 by albaud           ###   ########.fr       */
+/*   Created: 2023/02/14 00:41:05 by albaud            #+#    #+#             */
+/*   Updated: 2023/02/14 00:43:32 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef T_V_H
-# define T_V_H 2
+#include "cfiles.h"
 
-typedef struct s_v
+int	f_file_size(char *file_name)
 {
-	double	*arr;
+	int		res;
 	int		size;
-}	t_v;
+	int		fd;
+	char	tuffer[1000000];
 
-typedef struct s_v2
-{
-	double	x;
-	double	y;
-}	t_v2;
-
-typedef struct s_v3
-{
-	double	x;
-	double	y;
-	double	z;
-}	t_v3;
-
-#endif
+	fd = open(file_name, O_RDONLY);
+	if (fd == -1)
+		return (-1);
+	size = read(fd, tuffer, 999999);
+	res = 0;
+	while (size > 0)
+	{
+		res += size;
+		size = read(fd, tuffer, 999999);
+		if (size == -1)
+			return (size);
+	}
+	close(fd);
+	return (res);
+}

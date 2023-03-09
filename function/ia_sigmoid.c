@@ -6,11 +6,11 @@
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 10:36:22 by albaud            #+#    #+#             */
-/*   Updated: 2023/02/21 10:37:14 by albaud           ###   ########.fr       */
+/*   Updated: 2023/03/09 12:39:58 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libia.h"
+#include "../libia.h"
 
 double	sigmoid(double x)
 {
