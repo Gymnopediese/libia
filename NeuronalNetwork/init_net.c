@@ -60,25 +60,30 @@ void	net_clear(t_net *net)
 	}
 }
 
-t_net	*ia_init_net(t_net *res, char *name, t_info *info)
+void	init_net(t_net *res, ...)
 {
 	int		i;
+	va_list	l;
 
-	res->info = *info;
-	res->name = name;
-	res->input = m_new(info->data_size, info->inputs, 0);
-	res->hiden = alo(info->hiden_layers, sizeof(t_v));
-	res->delta_hiden = alo(info->hiden_layers, sizeof(t_v));
+	va_start(l, res);
+	res->name = va_arg(l, char *);
+	res->info.inputs = va_arg(l, int);
+	res->info.hiden_layers = va_arg(l, int);
+	res->info.hiden_layers_size = va_arg(l, int *);
+	res->info.outputs = va_arg(l, int);
+	res->function = va_arg(l, t_doublefd);
+	res->function_prime = va_arg(l, t_doublefd);
+
+	res->hiden = alo(res->info.hiden_layers, sizeof(t_v));
+	res->delta_hiden = alo(res->info.hiden_layers, sizeof(t_v));
 	i = -1;
-	while (++i < info->hiden_layers)
+	while (++i < res->info.hiden_layers)
 	{
-		res->hiden[i] = v_new(info->hiden_layers_size[i], 0);
-		res->delta_hiden[i] = v_new(info->hiden_layers_size[i], 0);
+		res->hiden[i] = v_new(res->info.hiden_layers_size[i], 0);
+		res->delta_hiden[i] = v_new(res->info.hiden_layers_size[i], 0);
 	}
-	res->output = m_new(info->data_size, info->outputs, 0);
-	res->predicted_output = v_new(info->outputs, 0);
-	res->delta_output = v_new(info->outputs, 0);
+	res->predicted_output = v_new(res->info.outputs, 0);
+	res->delta_output = v_new(res->info.outputs, 0);
 	init_weights(res);
-	mkdir(name, 0755);
-	return (res);
+	mkdir(res->name, 0755);
 }

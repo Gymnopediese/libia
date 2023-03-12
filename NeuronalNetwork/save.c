@@ -6,7 +6,7 @@
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 19:11:48 by albaud            #+#    #+#             */
-/*   Updated: 2023/03/07 23:26:27 by albaud           ###   ########.fr       */
+/*   Updated: 2023/03/11 11:21:08 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,9 @@ void	ia_load(t_net *net, char *name)
 	{
 		x = -1;
 		while (temp[++i] && temp[i][0] != '$')
+		{
 			ft_atoia_fast(temp[i], ',', net->weights[k].arr[++x].arr, 1);
+		}
 	}
 	k = -1;
 	while (temp[++i] && temp[i][0] != '$')
@@ -77,14 +79,21 @@ void	_save_synaps(const t_net *net, int fd)
 	}
 }
 
-void	ia_save(const t_net *net, char *name)
+void	ia_save(const t_net *net, ...)
 {
 	int		fd;
 	char	b[1000];
+	int		mode;
+	char	*bu;
+	va_list	l;
 
+	va_start(l, net);
+	mode = va_arg(l, int);
+	if (mode == SAVE_INT)
+		bu = ft_itoa(va_arg(l, int));
 	strcpy(b, net->name);
 	ft_strcat(b, "/");
-	strcat(b, name);
+	strcat(b, bu);
 	ft_strcat(b, ".snp");
 	errno = 0;
 	remove(b);

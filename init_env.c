@@ -1,35 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   t_v.h                                              :+:      :+:    :+:   */
+/*   init_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/15 21:06:06 by albaud            #+#    #+#             */
-/*   Updated: 2023/03/10 12:12:41 by albaud           ###   ########.fr       */
+/*   Created: 2023/03/10 11:55:40 by albaud            #+#    #+#             */
+/*   Updated: 2023/03/11 10:23:10 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef T_V_H
-# define T_V_H 2
+#include "libia.h"
 
-typedef struct s_v
+t_env	init_env(void *env, ...)
 {
-	double	*arr;
-	int		size;
-}	t_v;
+	t_env	res;
+	va_list	list;
 
-typedef struct s_v2
-{
-	double	x;
-	double	y;
-}	t_v2;
-
-typedef struct s_v3
-{
-	double	x;
-	double	y;
-	double	z;
-}	t_v3;
-
-#endif
+	va_start(list, env);
+	res.env = env;
+	res.step = va_arg(list, t_intf);
+	res.reset = va_arg(list, t_voidf);
+	res.draw = va_arg(list, t_voidf);
+	res.state = va_arg(list, t_voidf);
+	res.value = va_arg(list, t_doublef);
+	return (res);
+}

@@ -6,14 +6,14 @@
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 00:41:29 by albaud            #+#    #+#             */
-/*   Updated: 2023/02/14 20:13:01 by albaud           ###   ########.fr       */
+/*   Updated: 2023/03/10 16:02:32 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CFILES_H
 # define CFILES_H
 
-# include "../koflibc/sources.h"
+# include "../../koflibc/sources.h"
 
 int		f_file_size(char *file_name);
 char	*f_read(char *file_name);

@@ -6,19 +6,19 @@
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 21:06:06 by albaud            #+#    #+#             */
-/*   Updated: 2023/03/09 12:33:37 by albaud           ###   ########.fr       */
+/*   Updated: 2023/03/10 12:13:01 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef VLIB_H
 # define VLIB_H
 
-# include "t_v.h"
 # include <unistd.h>
 # include <math.h>
 # include <stdlib.h>
 # include <time.h>
 # include <stdio.h>
+# include "t_v.h"
 
 int		v_tocol(double r, double g, double b);
 t_v		v_new(int size, double init);
@@ -52,5 +52,6 @@ void	v_shuffle(t_v *a);
 double	rand_range(int min, int max);
 int		rand_range_weight(int r, int ratio);
 void	set_seed(int i);
+void	v_subn(t_v *a, double b, t_v *res);
 
 #endif
