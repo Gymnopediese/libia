@@ -6,7 +6,7 @@
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 01:25:40 by albaud            #+#    #+#             */
-/*   Updated: 2023/03/11 11:01:04 by albaud           ###   ########.fr       */
+/*   Updated: 2023/03/13 21:42:20 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,27 @@
 # include <math.h>
 # include <pthread.h>
 # include <stdio.h>
-# include "../p/p.h"
+# include "p/p.h"
 # include "mlib/mlib.h"
-# include "../koflibc/sources.h"
-# include "../cfiles/cfiles.h"
+# include "koflibc/sources.h"
+# include "cfiles/cfiles.h"
 
 typedef void	(*t_voidf)();
 typedef int		(*t_intf)();
 typedef double	(*t_doublef)();
 typedef double	(*t_doublefd)(double);
+
+typedef struct s_draw
+{
+	t_window	w;
+	t_v			canvas;
+	int			color;
+	int			brush_size;
+	int			pixel_size;
+	int			x;
+	int			y;
+	double		min;
+}	t_draw;
 
 enum
 {
@@ -128,6 +140,16 @@ typedef struct s_data
 	int		size;
 }	t_data;
 
+typedef struct s_gan
+{
+	t_net		inspector;
+	t_net		generator;
+	t_vis		vinspector;
+	t_vis		vgenerator;
+	t_data		data;
+	t_draw		draw;
+}	t_gan;
+
 // void		*env;
 // int		(*step)();
 // void		(*reset)();
@@ -178,4 +200,13 @@ void		ga_train(t_agent *agent, int generations, int r);
 
 int			get_action(t_net *net, t_v *inp, double exploration);
 
+t_gan		init_gan(void);
+void		train_gan(t_gan *gan, int iter);
+
+void		draw_digits(t_v *d, t_draw *draw);
+int			key(int k, t_draw *draw);
+int			up(int k, int a, int b, void *v);
+int			down(int k, int a, int b, void *v);
+int			draw(int x, int y, t_draw	*draw);
+void		init_draw_canvas(t_draw	*res, int x, int y, int pixel_size);
 #endif
