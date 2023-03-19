@@ -6,7 +6,7 @@
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 01:25:40 by albaud            #+#    #+#             */
-/*   Updated: 2023/03/13 21:42:20 by albaud           ###   ########.fr       */
+/*   Updated: 2023/03/20 00:49:29 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -209,4 +209,8 @@ int			up(int k, int a, int b, void *v);
 int			down(int k, int a, int b, void *v);
 int			draw(int x, int y, t_draw	*draw);
 void		init_draw_canvas(t_draw	*res, int x, int y, int pixel_size);
+
+
+//read a file of formate : <start> line to skip: input {0, 1, 2, 3, 4, etc}: input 
+t_data		read_data(char *path, int inp_size, int out_size, int start);
 #endif

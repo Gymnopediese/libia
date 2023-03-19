@@ -6,7 +6,7 @@
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 00:27:18 by albaud            #+#    #+#             */
-/*   Updated: 2023/03/13 21:58:45 by albaud           ###   ########.fr       */
+/*   Updated: 2023/03/16 17:18:45 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	draw_digits(t_v *d, t_draw *draw)
 	int	y;
 
 	x = -1;
+	v_copy(&draw->canvas, d);
 	ft_clean_canvas(draw->w.cvs);
 	while (++x < draw->x)
 	{
