@@ -6,7 +6,7 @@
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 19:11:48 by albaud            #+#    #+#             */
-/*   Updated: 2023/03/11 11:21:08 by albaud           ###   ########.fr       */
+/*   Updated: 2023/09/27 09:56:38 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,26 +17,24 @@
 
 void	ia_load(t_net *net, char *name)
 {
-	char	**temp;
-	int		i;
-	int		k;
-	int		x;
+	t_arr	temp;
+	size_t	i;
+	int	k;
+	int	x;
 
-	temp = f_readlines(name);
+	temp = readlines(name);
 	i = -1;
 	k = -1;
 	while (++k < net->info.hiden_layers + 1)
 	{
 		x = -1;
-		while (temp[++i] && temp[i][0] != '$')
-		{
-			ft_atoia_fast(temp[i], ',', net->weights[k].arr[++x].arr, 1);
-		}
+		while (++i < temp.size && temp.arrays[i].chars[0] != '$')
+			ft_atoia_fast(temp.arrays[i].chars, ',',
+				net->weights[k].arr[++x].arr, 1);
 	}
 	k = -1;
-	while (temp[++i] && temp[i][0] != '$')
-		ft_atoia_fast(temp[i], ',', net->bias[++k].arr, 1);
-	ft_free_pp((void **)temp);
+	while (++i < temp.size && temp.arrays[i].chars[0] != '$')
+		ft_atoia_fast(temp.arrays[i].chars, ',', net->bias[++k].arr, 1);
 }
 
 void	_save_bias(const t_net *net, int fd)
@@ -84,17 +82,17 @@ void	ia_save(const t_net *net, ...)
 	int		fd;
 	char	b[1000];
 	int		mode;
-	char	*bu;
+	t_str	bu;
 	va_list	l;
 
 	va_start(l, net);
 	mode = va_arg(l, int);
 	if (mode == SAVE_INT)
-		bu = ft_itoa(va_arg(l, int));
+		bu = itoa(va_arg(l, int));
 	strcpy(b, net->name);
-	ft_strcat(b, "/");
-	strcat(b, bu);
-	ft_strcat(b, ".snp");
+	strcat(b, "/");
+	strcat(b, bu.chars);
+	strcat(b, ".snp");
 	errno = 0;
 	remove(b);
 	fd = open(b, O_RDWR | O_CREAT, 0666);

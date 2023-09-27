@@ -6,7 +6,7 @@
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 00:31:40 by albaud            #+#    #+#             */
-/*   Updated: 2023/03/17 19:57:41 by albaud           ###   ########.fr       */
+/*   Updated: 2023/09/27 09:37:03 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,16 +132,16 @@ void	train_gan(t_gan *gan, int iter)
 	i = -1;
 	while (++i < iter)
 	{
-		progressbar("they are fighting", i, iter);
+		// progressbar("they are fighting", i, iter);
 		k = -1;
 		while (++k < max)
 		{
-			progressbar("sbufight", k, max);
+			// progressbar("sbufight", k, max);
 			train_inspector(gan, &gan->data.input.arr[(int)rand_range(0, 60000)], &g_inp, &out);
 			train_generator(gan, &g_inp, &inp, &out);
 		}
 	}
-	progressbar("they are fighting", i, iter);
+	// progressbar("they are fighting", i, iter);
 	free(inp.arr);
 }
 

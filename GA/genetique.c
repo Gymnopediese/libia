@@ -6,7 +6,7 @@
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 18:34:25 by albaud            #+#    #+#             */
-/*   Updated: 2023/03/11 12:21:19 by albaud           ###   ########.fr       */
+/*   Updated: 2023/09/27 09:36:49 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,7 +193,7 @@ void	ga_train(t_agent *agent, int generations, int r)
 	i = -1;
 	while (++i < generations)
 	{
-		progressbar("generationing :)", i, generations);
+		// progressbar("generationing :)", i, generations);
 		net_clear(&agent->net);
 		learn(agent, population);
 		ia_save(&agent->net, SAVE_INT, population[0].score);
@@ -205,5 +205,5 @@ void	ga_train(t_agent *agent, int generations, int r)
 		while (++j < POPSIZE)
 			population[j] = children[j];
 	}
-	progressbar("generationing :)", i, generations);
+	// progressbar("generationing :)", i, generations);
 }

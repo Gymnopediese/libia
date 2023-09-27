@@ -6,11 +6,11 @@
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 11:55:40 by albaud            #+#    #+#             */
-/*   Updated: 2023/03/11 10:23:10 by albaud           ###   ########.fr       */
+/*   Updated: 2023/09/27 09:37:20 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libia.h"
+#include "../libia.h"
 
 t_env	init_env(void *env, ...)
 {

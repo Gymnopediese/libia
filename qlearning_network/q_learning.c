@@ -6,7 +6,7 @@
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 20:15:58 by albaud            #+#    #+#             */
-/*   Updated: 2023/03/12 14:45:08 by albaud           ###   ########.fr       */
+/*   Updated: 2023/09/27 15:56:19 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,11 +125,11 @@ void	q_learing(t_agent *agent, int iteration)
 	i = -1;
 	while (++i < iteration)
 	{
-		progressbar("learning", i, iteration);
+		// progressbar("learning", i, iteration);
 		exploration = (double)(iteration - i * 2) / iteration;
 		if (exploration < 0.1)
 			exploration = 0.1;
 		q_learn(agent, exploration);
 	}
-	progressbar("learning", i, iteration);
+	// progressbar("learning", i, iteration);
 }

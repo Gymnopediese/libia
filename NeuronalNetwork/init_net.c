@@ -23,7 +23,7 @@ void	init_weights(t_net *net)
 	int	i;
 
 	net->bias = alo(net->info.hiden_layers + 1, sizeof(t_v));
-	net->weights = alo(net->info.hiden_layers + 1, sizeof(t_mtx));
+	net->weights = alo(net->info.hiden_layers + 1, sizeof(t_m));
 	net->weights[0] = m_rand(net->info.inputs,
 			net->info.hiden_layers_size[0], -1, 1);
 	i = 0;
@@ -73,7 +73,6 @@ void	init_net(t_net *res, ...)
 	res->info.outputs = va_arg(l, int);
 	res->function = va_arg(l, t_doublefd);
 	res->function_prime = va_arg(l, t_doublefd);
-
 	res->hiden = alo(res->info.hiden_layers, sizeof(t_v));
 	res->delta_hiden = alo(res->info.hiden_layers, sizeof(t_v));
 	i = -1;

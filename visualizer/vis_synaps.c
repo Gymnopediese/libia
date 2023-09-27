@@ -6,7 +6,7 @@
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 23:02:04 by albaud            #+#    #+#             */
-/*   Updated: 2023/03/07 23:39:11 by albaud           ###   ########.fr       */
+/*   Updated: 2023/09/27 15:57:54 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,5 +78,5 @@ void	synaps(t_vis *v, t_v *inp)
 	_vis_syn_inp(v, inp);
 	k = _vis_syn_hiden(v);
 	_vis_syn_out(v, k);
-	ft_putimg(v->w, v->w.cvs.img, (t_vector){0, 0, 0, 0});
+	ft_putimg(v->w, v->w.cvs.img, (t_v2){0, 0});
 }

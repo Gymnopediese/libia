@@ -6,7 +6,7 @@
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 02:07:21 by albaud            #+#    #+#             */
-/*   Updated: 2023/03/07 23:14:08 by albaud           ###   ########.fr       */
+/*   Updated: 2023/09/26 15:34:47 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 #define LEARNING -0.01
 
-void	m_stuff(t_mtx *m, t_v *a, t_v *b)
+void	m_stuff(t_m *m, t_v *a, t_v *b)
 {
 	int	x;
 	int	y;
