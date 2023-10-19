@@ -6,7 +6,7 @@
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 19:11:48 by albaud            #+#    #+#             */
-/*   Updated: 2023/09/27 09:56:38 by albaud           ###   ########.fr       */
+/*   Updated: 2023/10/18 09:07:06 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ void	_save_bias(const t_net *net, int fd)
 {
 	int		i;
 	int		x;
-	int		y;
 
 	i = -1;
 	while (++i < net->info.hiden_layers + 1)
@@ -49,7 +48,6 @@ void	_save_bias(const t_net *net, int fd)
 		x = -1;
 		while (++x < net->bias[i].size)
 		{
-			y = -1;
 			p(fd DD net->bias[i].arr[x] SS "," END);
 		}
 		p(fd NL END);
@@ -89,7 +87,7 @@ void	ia_save(const t_net *net, ...)
 	mode = va_arg(l, int);
 	if (mode == SAVE_INT)
 		bu = itoa(va_arg(l, int));
-	strcpy(b, net->name);
+	strcpy(b, net->info.name);
 	strcat(b, "/");
 	strcat(b, bu.chars);
 	strcat(b, ".snp");

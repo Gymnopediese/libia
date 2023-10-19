@@ -6,7 +6,7 @@
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 11:33:05 by albaud            #+#    #+#             */
-/*   Updated: 2023/03/13 14:57:23 by albaud           ###   ########.fr       */
+/*   Updated: 2023/09/29 09:32:40 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,12 @@ void	draw_pixel(int x, int y, t_draw *draw, int assign)
 		_y = -1;
 		while (++_y < draw->brush_size)
 		{
-			if (x + _x < draw->x * draw->pixel_size
-				&& y + _y < draw->y * draw->pixel_size)
+			if (x + _x < draw->w.cvs.x && y + _y < draw->w.cvs.y)
+			{
 				draw->canvas.arr[(y / draw->pixel_size + _x)
 					* draw->x + x / draw->pixel_size + _y]
 					= assign;
+			}
 		}
 	}
 }
@@ -57,7 +58,7 @@ int	draw(int x, int y, t_draw	*draw)
 		draw_pixel(x, y, draw, 1);
 	else
 		draw_pixel(x, y, draw, 0);
-	draw_digits(&draw->canvas, draw);
+	put_canvas(&draw->canvas, draw);
 	return (0);
 }
 

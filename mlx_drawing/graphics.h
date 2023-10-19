@@ -6,7 +6,7 @@
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 01:25:40 by albaud            #+#    #+#             */
-/*   Updated: 2023/09/27 16:02:54 by albaud           ###   ########.fr       */
+/*   Updated: 2023/09/29 09:12:44 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ t_v2		ppose(int n, int i, int fsize, int dsize);
 t_v2		spose(int n, int i, int fsize, int dsize);
 void		visualize(t_vis *v, t_v *inp);
 
-void		draw_digits(t_v *d, t_draw *draw);
+void		put_canvas(t_v *d, t_draw *draw);
 int			key(int k, t_draw *draw);
 int			up(int k, int a, int b, void *v);
 int			down(int k, int a, int b, void *v);

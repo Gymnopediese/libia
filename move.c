@@ -6,7 +6,7 @@
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 15:11:20 by albaud            #+#    #+#             */
-/*   Updated: 2023/03/11 10:47:55 by albaud           ###   ########.fr       */
+/*   Updated: 2023/10/04 10:24:50 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ void	free_run(t_run	*run)
 //double reward
 void	set_move(t_move *move, t_v *state, int action, double reward)
 {
-	move->input = alo(1, sizeof(t_v));
-	move->output = alo(1, sizeof(t_v));
+	move->input = new(1, sizeof(t_v));
+	move->output = new(1, sizeof(t_v));
 	*move->input = v_new(state->size, 0);
 	*move->output = v_new(4, 0);
 	v_copy(move->input, state);
@@ -67,9 +67,9 @@ void	add_move(t_run *r, t_v *state, int action, double reward)
 {
 	t_move	*nb;
 
-	nb = alo(1, sizeof(t_move));
-	nb->input = alo(1, sizeof(t_v));
-	nb->output = alo(1, sizeof(t_v));
+	nb = new(1, sizeof(t_move));
+	nb->input = new(1, sizeof(t_v));
+	nb->output = new(1, sizeof(t_v));
 	*nb->input = v_new(state->size, 0);
 	*nb->output = v_new(4, 0);
 	v_copy(nb->input, state);

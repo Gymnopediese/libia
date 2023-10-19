@@ -6,7 +6,7 @@
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 20:15:58 by albaud            #+#    #+#             */
-/*   Updated: 2023/09/27 15:56:19 by albaud           ###   ########.fr       */
+/*   Updated: 2023/10/18 08:39:59 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,13 @@ void	get_moves(t_agent *agent, t_move *moves, t_v *indexes, t_v2 *data)
 	int	reward;
 	t_v	inp;
 	int	action;
-	t_v	*temp;
+	// t_v	*temp;
 	int	set_previous;
 
 	reward = 0;
 	agent->env.reset(agent->env.env);
 	inp = v_new(agent->net.info.inputs, 0);
-	temp = 0;
+	// temp = 0;
 	set_previous = 0;
 	while (reward != -1 && reward != 10)
 	{

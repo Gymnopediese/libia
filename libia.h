@@ -6,7 +6,7 @@
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 01:25:40 by albaud            #+#    #+#             */
-/*   Updated: 2023/09/27 16:00:10 by albaud           ###   ########.fr       */
+/*   Updated: 2023/10/18 09:49:52 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,26 @@ enum
 	SAVE_STRING,
 };
 
+// char	*name;
+// int		inputs;
+// int		hiden_layers;
+// int		*hiden_layers_size;
+// int		outputs;
+// double	(*function)(double);
+// double	(*function_prime)(double);
 typedef struct s_info
 {
+	char	*name;
+
+	double	learning;
 	int		inputs;
 	int		hiden_layers;
 	int		*hiden_layers_size;
 	int		outputs;
+
+	double	(*function)(double);
+	double	(*function_prime)(double);
+
 }	t_info;
 
 typedef struct s_net
@@ -64,10 +78,6 @@ typedef struct s_net
 
 	t_m		*weights;
 
-	char	*name;
-
-	double	(*function)(double);
-	double	(*function_prime)(double);
 }	t_net;
 
 typedef struct s_move
@@ -92,14 +102,17 @@ typedef struct s_run
 // void		(*draw)();
 // void		(*state)();
 // double	(*value)();
+
+// typedef struct s_env t_env;
+
 typedef struct s_env
 {
 	void		*env;
-	int			(*step)();
-	void		(*reset)();
-	void		(*draw)();
-	void		(*state)();
-	double		(*value)();
+	int			(*step)(struct s_env *, int move);
+	void		(*reset)(struct s_env *);
+	void		(*draw)(struct s_env *);
+	void		(*state)(struct s_env *, t_v *input);
+	double		(*value)(struct s_env *);
 }	t_env;
 
 # if __has_include("../mlx/minilibx.h") && __has_include(<stdint.h>)
@@ -141,7 +154,7 @@ typedef struct s_gan
 // void		(*draw)();
 // void		(*state)();
 t_env		init_env(void *env, ...);
-
+void print_net(t_net *net);
 // char	*name;
 // int		inputs_size;
 // int		hiden_layers_amount;
@@ -149,12 +162,12 @@ t_env		init_env(void *env, ...);
 // int		outputs_size;
 // double	(*function)(double);
 // double	(*function_prime)(double);
-void		init_net(t_net *res, ...);
+void		init_neuronal_network(t_net *res, t_info infos);
 void		ft_atoia_fast(char *str, char split, double *buffer, int div);
 void		free_move(t_move *m);
 void		set_move(t_move *move, t_v *state, int action, double reward);
-void		*alo(int n, int size);
-void		ia_forward(t_net *net, t_v *input);
+
+void		ia_forward(t_net *net, const t_v *input);
 void		ia_backward(t_net *net, t_v *input, t_v *output);
 void		ia_pforward(t_net *net, t_v *input);
 void		ia_random_train(t_net *net, int n);
@@ -164,7 +177,7 @@ void		net_clear(t_net *net);
 void		ia_load(t_net *net, char *name);
 double		ia_k_voisins(t_m *input, t_v *output, t_v *guess, int v);
 double		ia_k_voisins_om(t_m *input, t_m *output, t_v *guess, int v);
-
+void		atoia(double *res, char *str, char *split);
 void		q_learing(t_agent *agent, int iteration);
 double		relu(double x);
 double		relu_prime(double x);
@@ -179,8 +192,11 @@ int			get_action(t_net *net, t_v *inp, double exploration);
 
 t_gan		init_gan(void);
 void		train_gan(t_gan *gan, int iter);
-
+void	train_test_neuronal_network(t_net *net, t_data *data, t_data *train, int iteration);
 
 //read a file of formate : <start> line to skip: input {0, 1, 2, 3, 4, etc}: input 
 t_data		read_data(char *path, int inp_size, int out_size, int start);
+t_data		read_csv_file(char *path, int inp_size, int out_size, int start, int length);
+void		train_neuronal_network(t_net *net, t_data *data, int iteration);
+void		test_neuronal_network(t_net *net, t_data *data);
 #endif

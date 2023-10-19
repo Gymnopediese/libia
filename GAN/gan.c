@@ -6,7 +6,7 @@
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 00:31:40 by albaud            #+#    #+#             */
-/*   Updated: 2023/09/27 09:37:03 by albaud           ###   ########.fr       */
+/*   Updated: 2023/10/04 10:16:08 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,19 +72,19 @@ void	ia_backward_inp(t_net *net, t_v *input, t_v *output)
 		delta_input = v_new(net->info.inputs, 0);
 	v_subs(&net->predicted_output, output, &net->delta_output);
 	i = net->info.hiden_layers - 1;
-	v_apply(&net->hiden[i], net->function);
+	v_apply(&net->hiden[i], net->info.function);
 	m_vvdot(&net->weights[i + 1], &net->delta_output, &net->delta_hiden[i]);
 	v_mult(&net->hiden[i], &net->delta_hiden[i], &net->delta_hiden[i]);
 	while (--i >= 0)
 	{
-		v_apply(&net->hiden[i], net->function_prime);
+		v_apply(&net->hiden[i], net->info.function_prime);
 		m_vvdot(&net->weights[i + 1],
 			&net->delta_hiden[i + 1], &net->delta_hiden[i]);
 		v_mult(&net->hiden[i], &net->delta_hiden[i], &net->delta_hiden[i]);
 	}
 	// printf("\n");
 	// v_xprint(input, 10);
-	v_apply(input, net->function_prime);
+	v_apply(input, net->info.function_prime);
 	// v_xprint(input, 10);
 	m_vvdot(&net->weights[0], &net->delta_hiden[0], input);
 	// v_xprint(&delta_input, 10);
@@ -145,18 +145,18 @@ void	train_gan(t_gan *gan, int iter)
 	free(inp.arr);
 }
 
-t_gan	init_gan(void)
-{
-	t_gan	gan;
+// t_gan	init_gan(void)
+// {
+// 	t_gan	gan;
 
-	init_net(&gan.inspector,
-		"inspector", 784, 1, (int []){77}, 1, sigmoid, sigmoid_prime);
-	init_net(&gan.generator,
-		"generator", 784, 1, (int []){77}, 784, sigmoid, sigmoid_prime);
-	printf("%i %i\n", gan.generator.bias->size, gan.inspector.bias->size);
-	printf("%i %i\n", gan.generator.weights[0].size, gan.inspector.weights[1].arr->size);
-	printf("%i %i\n", gan.generator.weights[0].arr->size, gan.inspector.weights[1].size);
-	printf("%i %i\n", gan.generator.weights[1].size, gan.inspector.weights[0].arr->size);
-	printf("%i %i\n", gan.generator.weights[1].arr->size, gan.inspector.weights[0].size);
-	return (gan);
-}
+// 	init_neuronal_network(&gan.inspector,
+// 		"inspector", 784, 1, (int []){77}, 1, sigmoid, sigmoid_prime);
+// 	init_neuronal_network(&gan.generator,
+// 		"generator", 784, 1, (int []){77}, 784, sigmoid, sigmoid_prime);
+// 	printf("%i %i\n", gan.generator.bias->size, gan.inspector.bias->size);
+// 	printf("%i %i\n", gan.generator.weights[0].size, gan.inspector.weights[1].arr->size);
+// 	printf("%i %i\n", gan.generator.weights[0].arr->size, gan.inspector.weights[1].size);
+// 	printf("%i %i\n", gan.generator.weights[1].size, gan.inspector.weights[0].arr->size);
+// 	printf("%i %i\n", gan.generator.weights[1].arr->size, gan.inspector.weights[0].size);
+// 	return (gan);
+// }
