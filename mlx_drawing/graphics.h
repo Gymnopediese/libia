@@ -6,7 +6,7 @@
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 01:25:40 by albaud            #+#    #+#             */
-/*   Updated: 2023/09/29 09:12:44 by albaud           ###   ########.fr       */
+/*   Updated: 2023/10/23 18:29:18 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef struct s_draw
 	int			x;
 	int			y;
 	double		min;
+	void		(*key)();
 }	t_draw;
 
 typedef struct s_vis

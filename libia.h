@@ -6,7 +6,7 @@
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 01:25:40 by albaud            #+#    #+#             */
-/*   Updated: 2023/10/18 09:49:52 by albaud           ###   ########.fr       */
+/*   Updated: 2023/10/23 18:22:52 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 // # include "koflibc/sources.h"
 # include "../libalbaud.h"
 // # include "cfiles/cfiles.h"
+# define MINMAXRAND 0.5
 
 typedef void	(*t_voidf)();
 typedef int		(*t_intf)();
@@ -37,10 +38,11 @@ typedef double	(*t_doublefd)(double);
 
 enum
 {
-	SAVE_INT,
-	SAVE_DOUBLE,
-	SAVE_PERCENTAGE,
-	SAVE_STRING,
+	FUNCTION_SIGMOID,
+	FUNCTION_RELU,
+	FUNCTION_TANH,
+	FUNCTION_SOFTMAX,
+	FUNCTION_NONE
 };
 
 // char	*name;
@@ -60,8 +62,7 @@ typedef struct s_info
 	int		*hiden_layers_size;
 	int		outputs;
 
-	double	(*function)(double);
-	double	(*function_prime)(double);
+	int		function;
 
 }	t_info;
 
@@ -77,6 +78,9 @@ typedef struct s_net
 	t_v		delta_output;
 
 	t_m		*weights;
+
+	double	(*function)(double);
+	double	(*function_prime)(double);
 
 }	t_net;
 
@@ -163,7 +167,6 @@ void print_net(t_net *net);
 // double	(*function)(double);
 // double	(*function_prime)(double);
 void		init_neuronal_network(t_net *res, t_info infos);
-void		ft_atoia_fast(char *str, char split, double *buffer, int div);
 void		free_move(t_move *m);
 void		set_move(t_move *move, t_v *state, int action, double reward);
 
@@ -173,8 +176,8 @@ void		ia_pforward(t_net *net, t_v *input);
 void		ia_random_train(t_net *net, int n);
 void		ia_train_test(t_net *net, int n, double (*test)(t_net *));
 void		ia_save(const t_net *net, ...);
+t_net		ia_load(char *filename);
 void		net_clear(t_net *net);
-void		ia_load(t_net *net, char *name);
 double		ia_k_voisins(t_m *input, t_v *output, t_v *guess, int v);
 double		ia_k_voisins_om(t_m *input, t_m *output, t_v *guess, int v);
 void		atoia(double *res, char *str, char *split);
@@ -183,11 +186,13 @@ double		relu(double x);
 double		relu_prime(double x);
 double		sigmoid(double x);
 double		sigmoid_prime(double x);
-
+double		softmax(double x);
+double		softmax_prime(double x);
+double		tanh_prime(double x);
 void		free_run(t_run	*run);
 void		add_move(t_run *r, t_v *state, int action, double reward);
 void		ga_train(t_agent *agent, int generations, int r);
-
+int			ia_predict(t_net *net, const t_v *input);
 int			get_action(t_net *net, t_v *inp, double exploration);
 
 t_gan		init_gan(void);
@@ -198,5 +203,6 @@ void	train_test_neuronal_network(t_net *net, t_data *data, t_data *train, int it
 t_data		read_data(char *path, int inp_size, int out_size, int start);
 t_data		read_csv_file(char *path, int inp_size, int out_size, int start, int length);
 void		train_neuronal_network(t_net *net, t_data *data, int iteration);
-void		test_neuronal_network(t_net *net, t_data *data);
+double		test_neuronal_network(t_net *net, t_data *data);
+void		set_function(t_net *res);
 #endif

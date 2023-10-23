@@ -6,7 +6,7 @@
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 00:27:18 by albaud            #+#    #+#             */
-/*   Updated: 2023/09/29 09:31:50 by albaud           ###   ########.fr       */
+/*   Updated: 2023/10/23 18:28:55 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ void	init_draw_canvas(t_draw	*res, int x, int y, int pixel_size)
 
 int	key(int k, t_draw *draw)
 {
+	if (draw->key)
+		draw->key(k, draw);
 	if (k == KEYCODE_SPACE)
 		v_clear(&draw->canvas, 0);
 	if (k == KEYCODE_1)

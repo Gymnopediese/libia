@@ -6,7 +6,7 @@
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 20:15:58 by albaud            #+#    #+#             */
-/*   Updated: 2023/10/18 08:39:59 by albaud           ###   ########.fr       */
+/*   Updated: 2023/10/23 17:10:05 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,8 +113,8 @@ void	q_learn(t_agent *agent, double exploration)
 		free_move(&moves[(int)data.x]);
 	free(indexes.arr);
 	printf("max %i\n", max);
-	if (save)
-		ia_save(&agent->net, SAVE_INT, max);
+	// if (save)
+		// ia_save(&agent->net, SAVE_INT, max);
 }
 
 void	q_learing(t_agent *agent, int iteration)

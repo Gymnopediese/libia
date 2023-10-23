@@ -6,7 +6,7 @@
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 19:11:48 by albaud            #+#    #+#             */
-/*   Updated: 2023/10/18 09:07:06 by albaud           ###   ########.fr       */
+/*   Updated: 2023/10/23 18:14:25 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,6 @@
 
 #include <string.h>
 #include <sys/errno.h>
-
-void	ia_load(t_net *net, char *name)
-{
-	t_arr	temp;
-	size_t	i;
-	int	k;
-	int	x;
-
-	temp = readlines(name);
-	i = -1;
-	k = -1;
-	while (++k < net->info.hiden_layers + 1)
-	{
-		x = -1;
-		while (++i < temp.size && temp.arrays[i].chars[0] != '$')
-			ft_atoia_fast(temp.arrays[i].chars, ',',
-				net->weights[k].arr[++x].arr, 1);
-	}
-	k = -1;
-	while (++i < temp.size && temp.arrays[i].chars[0] != '$')
-		ft_atoia_fast(temp.arrays[i].chars, ',', net->bias[++k].arr, 1);
-}
 
 void	_save_bias(const t_net *net, int fd)
 {
@@ -75,27 +53,38 @@ void	_save_synaps(const t_net *net, int fd)
 	}
 }
 
+void	_save_infos(const t_net *net, int fd)
+{
+	int	i;
+
+	i = -1;
+	p(fd SS net->info.name NL END);
+	p(fd II net->info.inputs NL END);
+	p(fd II net->info.outputs NL END);
+	p(fd DD net->info.learning NL END);
+	p(fd II net->info.function NL END);
+	p(fd II net->info.hiden_layers NL END);
+	while (++i < net->info.hiden_layers)
+		p(fd II net->info.hiden_layers_size[i] NL END);
+}
+
 void	ia_save(const t_net *net, ...)
 {
 	int		fd;
-	char	b[1000];
-	int		mode;
-	t_str	bu;
+	t_str	name;
+	char	*str;
 	va_list	l;
 
 	va_start(l, net);
-	mode = va_arg(l, int);
-	if (mode == SAVE_INT)
-		bu = itoa(va_arg(l, int));
-	strcpy(b, net->info.name);
-	strcat(b, "/");
-	strcat(b, bu.chars);
-	strcat(b, ".snp");
-	errno = 0;
-	remove(b);
-	fd = open(b, O_RDWR | O_CREAT, 0666);
-	if (fd == -1 && p(1 SS strerror(errno) END))
-		exit(1);
+	str =  va_arg(l, char *);
+	name = va_format(str, &l);
+	printf("%s\n", name.chars);
+	prepend(&name, s("save/"));
+	printf("%s\n", name.chars);
+	remove(name.chars);
+	fd = open(name.chars, O_RDWR | O_CREAT, 0666);
+	assert(fd == -1, "cannot save synaps");
+	_save_infos(net, fd);
 	_save_synaps(net, fd);
 	_save_bias(net, fd);
 	close(fd);

@@ -11,9 +11,6 @@
 /* ************************************************************************** */
 
 #include "../libia.h"
-#include <stdio.h>
-
-#define MINMAXRAND 2 
 
 void	print_net(t_net *net)
 {
@@ -49,22 +46,28 @@ void	init_weights(t_net *net)
 	net->bias[i] = v_new(net->info.outputs, 0);
 }
 
-double	randomdouble(double c)
+void	set_function(t_net *res)
 {
-	(void) c;
-	return (randdouble(-MINMAXRAND, MINMAXRAND));
-}
 
-void	net_clear(t_net *net)
-{
-	int	i;
-
-	i = -1;
-	printf("mother\n");
-	while (++i)
+	if (res->info.function == FUNCTION_SIGMOID)
 	{
-		m_apply(&net->weights[i], randomdouble);
-		v_apply(&net->bias[i], randomdouble);
+		res->function = sigmoid;
+		res->function_prime = sigmoid_prime;
+	}
+	else if (res->info.function == FUNCTION_RELU)
+	{
+		res->function = relu;
+		res->function_prime = relu_prime;
+	}
+	else if (res->info.function == FUNCTION_TANH)
+	{
+		res->function = tanh;
+		res->function_prime = tanh_prime;
+	}
+	else if (res->info.function == FUNCTION_SOFTMAX)
+	{
+		res->function = softmax;
+		res->function_prime = softmax_prime;
 	}
 }
 
@@ -73,6 +76,7 @@ void	init_neuronal_network(t_net *res, t_info infos)
 	int		i;
 
 	res->info = infos;
+	set_function(res);
 	res->hiden = new(res->info.hiden_layers, sizeof(t_v));
 	res->delta_hiden = new(res->info.hiden_layers, sizeof(t_v));
 	i = -1;
@@ -84,5 +88,4 @@ void	init_neuronal_network(t_net *res, t_info infos)
 	res->predicted_output = v_new(res->info.outputs, 0);
 	res->delta_output = v_new(res->info.outputs, 0);
 	init_weights(res);
-	mkdir(res->info.name, 0755);
 }
