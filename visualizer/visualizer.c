@@ -6,11 +6,13 @@
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 12:03:19 by albaud            #+#    #+#             */
-/*   Updated: 2023/03/07 23:44:21 by albaud           ###   ########.fr       */
+/*   Updated: 2023/10/24 12:45:40 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libia.h"
+
+#if __has_include("../../mlx/minilibx.h") && __has_include(<stdint.h>)
 
 void	*visloop(void	*vv)
 {
@@ -47,3 +49,4 @@ void	init_visualizer(t_vis *v, t_net *n)
 	ft_draw_circle(&v->off, NSIZE * 4 / 5, BLUE);
 	pthread_create(&v->t, 0, visloop, v);
 }
+#endif

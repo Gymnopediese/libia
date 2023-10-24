@@ -6,11 +6,13 @@
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 23:09:50 by albaud            #+#    #+#             */
-/*   Updated: 2023/09/27 15:57:31 by albaud           ###   ########.fr       */
+/*   Updated: 2023/10/24 12:45:20 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libia.h"
+
+#if __has_include("../../mlx/minilibx.h") && __has_include(<stdint.h>)
 
 void	_vis_inp(t_vis *v, t_v *inp)
 {
@@ -81,3 +83,4 @@ void	visualize(t_vis *v, t_v *inp)
 	k = _vis_hiden(v);
 	_vis_out(v, k);
 }
+#endif

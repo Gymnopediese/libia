@@ -6,11 +6,13 @@
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 11:33:05 by albaud            #+#    #+#             */
-/*   Updated: 2023/09/29 09:32:40 by albaud           ###   ########.fr       */
+/*   Updated: 2023/10/24 12:44:32 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libia.h"
+
+#if __has_include("../../mlx/minilibx.h") && __has_include(<stdint.h>)
 
 int	*pressed(void)
 {
@@ -50,7 +52,7 @@ void	draw_pixel(int x, int y, t_draw *draw, int assign)
 	}
 }
 
-int	draw(int x, int y, t_draw	*draw)
+int	draw(int x, int y, t_draw *draw)
 {
 	if (!*pressed())
 		return (0);
@@ -68,3 +70,4 @@ int	down(int k, int a, int b, void *v)
 	draw(a, b, v);
 	return (0);
 }
+#endif

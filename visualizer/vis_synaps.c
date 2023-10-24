@@ -6,11 +6,13 @@
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 23:02:04 by albaud            #+#    #+#             */
-/*   Updated: 2023/09/27 15:57:54 by albaud           ###   ########.fr       */
+/*   Updated: 2023/10/24 12:45:27 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libia.h"
+
+#if __has_include("../../mlx/minilibx.h") && __has_include(<stdint.h>)
 
 void	_vis_syn_inp(t_vis *v, t_v *inp)
 {
@@ -80,3 +82,4 @@ void	synaps(t_vis *v, t_v *inp)
 	_vis_syn_out(v, k);
 	ft_putimg(v->w, v->w.cvs.img, (t_v2){0, 0});
 }
+#endif
