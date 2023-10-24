@@ -6,7 +6,7 @@
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 19:11:48 by albaud            #+#    #+#             */
-/*   Updated: 2023/10/23 18:14:25 by albaud           ###   ########.fr       */
+/*   Updated: 2023/10/24 12:01:52 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,11 +76,9 @@ void	ia_save(const t_net *net, ...)
 	va_list	l;
 
 	va_start(l, net);
-	str =  va_arg(l, char *);
+	str = va_arg(l, char *);
 	name = va_format(str, &l);
-	printf("%s\n", name.chars);
 	prepend(&name, s("save/"));
-	printf("%s\n", name.chars);
 	remove(name.chars);
 	fd = open(name.chars, O_RDWR | O_CREAT, 0666);
 	assert(fd == -1, "cannot save synaps");
@@ -88,4 +86,5 @@ void	ia_save(const t_net *net, ...)
 	_save_synaps(net, fd);
 	_save_bias(net, fd);
 	close(fd);
+	printf("synapses saved in %s\n", name.chars);
 }

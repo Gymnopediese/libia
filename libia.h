@@ -6,7 +6,7 @@
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 01:25:40 by albaud            #+#    #+#             */
-/*   Updated: 2023/10/23 18:22:52 by albaud           ###   ########.fr       */
+/*   Updated: 2023/10/24 11:35:34 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,7 +158,7 @@ typedef struct s_gan
 // void		(*draw)();
 // void		(*state)();
 t_env		init_env(void *env, ...);
-void print_net(t_net *net);
+void 		print_net(t_net *net);
 // char	*name;
 // int		inputs_size;
 // int		hiden_layers_amount;
@@ -197,7 +197,7 @@ int			get_action(t_net *net, t_v *inp, double exploration);
 
 t_gan		init_gan(void);
 void		train_gan(t_gan *gan, int iter);
-void	train_test_neuronal_network(t_net *net, t_data *data, t_data *train, int iteration);
+void		train_test_neuronal_network(t_net *net, t_data *data, t_data *train, int iteration);
 
 //read a file of formate : <start> line to skip: input {0, 1, 2, 3, 4, etc}: input 
 t_data		read_data(char *path, int inp_size, int out_size, int start);
@@ -205,4 +205,8 @@ t_data		read_csv_file(char *path, int inp_size, int out_size, int start, int len
 void		train_neuronal_network(t_net *net, t_data *data, int iteration);
 double		test_neuronal_network(t_net *net, t_data *data);
 void		set_function(t_net *res);
+
+void		m_stuff(t_m *m, const t_v *a, const t_v *b, const double learning);
+void		propagation(t_m *weights, t_v *hiden, t_v *right, t_v *left, t_net *net);
+void		v_addapply(t_v *a, const t_v *b, double (*f)(double));
 #endif

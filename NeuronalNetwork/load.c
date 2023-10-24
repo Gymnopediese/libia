@@ -6,7 +6,7 @@
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 16:46:21 by albaud            #+#    #+#             */
-/*   Updated: 2023/10/23 18:05:06 by albaud           ###   ########.fr       */
+/*   Updated: 2023/10/23 18:56:47 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ t_net	ia_load(char *filename)
 	lines = readlines(filename);
 	line = _load_infos(&res, &lines) - 1;
 	init_neuronal_network(&res, res.info);
-	print_net(&res);
 	k = -1;
 	while (++k < res.info.hiden_layers + 1)
 	{
@@ -52,10 +51,8 @@ t_net	ia_load(char *filename)
 		while (++line < lines.size && lines.arrays[line].chars[0] != '$')
 			atoia(res.weights[k].arr[++x].arr, lines.arrays[line].chars, ",");
 	}
-	printf("line: %zu\n", line);
 	k = -1;
 	while (++line < lines.size && lines.arrays[line].chars[0] != '$')
 		atoia(res.bias[++k].arr, lines.arrays[line].chars, ",");
-	printf("line: %zu\n", line);
 	return (res);
 }
