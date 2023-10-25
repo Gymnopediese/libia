@@ -6,7 +6,7 @@
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 00:31:40 by albaud            #+#    #+#             */
-/*   Updated: 2023/10/23 17:09:19 by albaud           ###   ########.fr       */
+/*   Updated: 2023/10/25 11:35:25 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,52 +41,52 @@
 // void	fake(t_gan *gan, t_v *inp, t_v *out)
 // {
 // 	v_apply(inp, ran);
-// 	ia_forward(&gan->generator, inp);
-// 	ia_forward(&gan->inspector, &gan->generator.predicted_output);
+// 	ann_forward(&gan->generator, inp);
+// 	ann_forward(&gan->inspector, &gan->generator.predicted_output);
 // 	//out->arr[0] = -log(1 - gan->inspector.predicted_output.arr[0]);
 // 	out->arr[0] = 0;
-// 	ia_backward(&gan->inspector, &gan->generator.predicted_output, out);
+// 	ann_backward(&gan->inspector, &gan->generator.predicted_output, out);
 // 	clone(gan);
 // }
 
 // void	reel(t_gan *gan, t_v *inp, t_v *out)
 // {
-// 	ia_forward(&gan->inspector, inp);
+// 	ann_forward(&gan->inspector, inp);
 // 	//out->arr[0] = -log(gan->inspector.predicted_output.arr[0]);
 // 	out->arr[0] = 1;
-// 	ia_backward(&gan->inspector, inp, out);
+// 	ann_backward(&gan->inspector, inp, out);
 // }
 
 double	ran(double n)
 {
 	(void)n;
-	return (rand_range(0, 1));
+	return (randdouble(0, 1));
 }
 
-void	ia_backward_inp(t_net *net, t_v *input, t_v *output)
+void	ann_backward_inp(t_ann *ann, t_v *input, t_v *output)
 {
 	int			i;
 	static t_v	delta_input = (t_v){0, 0};
 
 	if (delta_input.arr == 0)
-		delta_input = v_new(net->info.inputs, 0);
-	v_subs(&net->predicted_output, output, &net->delta_output);
-	i = net->info.hiden_layers - 1;
-	v_apply(&net->hiden[i], net->function);
-	m_vvdot(&net->weights[i + 1], &net->delta_output, &net->delta_hiden[i]);
-	v_mult(&net->hiden[i], &net->delta_hiden[i], &net->delta_hiden[i]);
+		delta_input = v_new(ann->info.inputs, 0);
+	v_subs(&ann->predicted_output, output, &ann->delta_output);
+	i = ann->info.hiden_layers - 1;
+	v_apply(&ann->hiden[i], ann->function);
+	m_vvdot(&ann->weights[i + 1], &ann->delta_output, &ann->delta_hiden[i]);
+	v_mult(&ann->hiden[i], &ann->delta_hiden[i], &ann->delta_hiden[i]);
 	while (--i >= 0)
 	{
-		v_apply(&net->hiden[i], net->function_prime);
-		m_vvdot(&net->weights[i + 1],
-			&net->delta_hiden[i + 1], &net->delta_hiden[i]);
-		v_mult(&net->hiden[i], &net->delta_hiden[i], &net->delta_hiden[i]);
+		v_apply(&ann->hiden[i], ann->function_prime);
+		m_vvdot(&ann->weights[i + 1],
+			&ann->delta_hiden[i + 1], &ann->delta_hiden[i]);
+		v_mult(&ann->hiden[i], &ann->delta_hiden[i], &ann->delta_hiden[i]);
 	}
 	// printf("\n");
 	// v_xprint(input, 10);
-	v_apply(input, net->function_prime);
+	v_apply(input, ann->function_prime);
 	// v_xprint(input, 10);
-	m_vvdot(&net->weights[0], &net->delta_hiden[0], input);
+	m_vvdot(&ann->weights[0], &ann->delta_hiden[0], input);
 	// v_xprint(&delta_input, 10);
 	// v_mult(input, &delta_input, input);
 	// v_xprint(input, 10);
@@ -95,25 +95,25 @@ void	ia_backward_inp(t_net *net, t_v *input, t_v *output)
 
 void	train_inspector(t_gan *gan, t_v *t_inp, t_v *f_inp, t_v *out)
 {
-	ia_forward(&gan->inspector, t_inp);
+	ann_forward(&gan->inspector, t_inp);
 	out->arr[0] = 1;
-	ia_backward(&gan->inspector, t_inp, out);
+	ann_backward(&gan->inspector, t_inp, out);
 	v_apply(f_inp, ran);
-	ia_forward(&gan->generator, f_inp);
-	ia_forward(&gan->inspector, &gan->generator.predicted_output);
+	ann_forward(&gan->generator, f_inp);
+	ann_forward(&gan->inspector, &gan->generator.predicted_output);
 	out->arr[0] = 0;
-	ia_backward(&gan->inspector, &gan->generator.predicted_output, out);
+	ann_backward(&gan->inspector, &gan->generator.predicted_output, out);
 }
 
 void	train_generator(t_gan *gan, t_v *g_inp, t_v *inp, t_v *out)
 {
 	v_apply(g_inp, ran);
-	ia_forward(&gan->generator, g_inp);
+	ann_forward(&gan->generator, g_inp);
 	v_copy(inp, &gan->generator.predicted_output);
-	ia_forward(&gan->inspector, inp);
+	ann_forward(&gan->inspector, inp);
 	out->arr[0] = 1;
-	ia_backward_inp(&gan->inspector, inp, out);
-	ia_backward(&gan->generator, g_inp, inp);
+	ann_backward_inp(&gan->inspector, inp, out);
+	ann_backward(&gan->generator, g_inp, inp);
 }
 
 void	train_gan(t_gan *gan, int iter)
@@ -137,7 +137,7 @@ void	train_gan(t_gan *gan, int iter)
 		while (++k < max)
 		{
 			// progressbar("sbufight", k, max);
-			train_inspector(gan, &gan->data.input.arr[(int)rand_range(0, 60000)], &g_inp, &out);
+			train_inspector(gan, &gan->data.input.arr[(int)randint(0, 60000)], &g_inp, &out);
 			train_generator(gan, &g_inp, &inp, &out);
 		}
 	}

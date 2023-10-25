@@ -6,13 +6,13 @@
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 16:03:17 by albaud            #+#    #+#             */
-/*   Updated: 2023/09/26 15:34:47 by albaud           ###   ########.fr       */
+/*   Updated: 2023/10/25 11:35:22 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libia.h"
 
-double	ia_k_voisins_om(t_m *input, t_m *output, t_v *guess, int v)
+double	ann_k_voisins_om(t_m *input, t_m *output, t_v *guess, int v)
 {
 	t_v		min;
 	t_v		val;
@@ -40,7 +40,7 @@ double	ia_k_voisins_om(t_m *input, t_m *output, t_v *guess, int v)
 	return (v_omax(&val));
 }
 
-double	ia_k_voisins(t_m *input, t_v *output, t_v *guess, int v)
+double	ann_k_voisins(t_m *input, t_v *output, t_v *guess, int v)
 {
 	t_v		min;
 	t_v		val;

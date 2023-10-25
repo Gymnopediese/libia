@@ -6,7 +6,7 @@
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 12:03:19 by albaud            #+#    #+#             */
-/*   Updated: 2023/10/24 12:45:40 by albaud           ###   ########.fr       */
+/*   Updated: 2023/10/25 02:41:31 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	*visloop(void	*vv)
 	return (0);
 }
 
-void	init_visualizer(t_vis *v, t_net *n)
+void	init_visualizer(t_vis *v, t_ann *n)
 {
 	int	num;
 
